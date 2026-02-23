@@ -1,0 +1,53 @@
+Introduction to SQL
+SQL (Structured Query Language) is a standard programming language specifically designed for managing and manipulating databases. It is essential for data analysts and data scientists as it allows users to interact with, retrieve, manipulate, and analyze data stored within a database. SQL is foundational for tasks involving data exploration, analysis, and reporting.
+
+What is a Database?
+A database is essentially a collection of interrelated tables. A table in a database is comprised of rows and columns, with each row representing a unique record and each column representing a particular attribute of the data .
+
+Database Management System (DBMS)
+A Database Management System (DBMS) is a software tool that facilitates the creation, manipulation, and management of data in databases. It allows users to execute CRUD operations, which include Create, Read, Update, and Delete datasets within a database .
+
+Example:
+Consider a table with columns such as date, id, and name. Operations such as reading data from this table are considered part of the DBMS functionalities .
+Types of Databases
+Relational Databases
+Relational databases store data in a structured format using tables where there is a defined relationship between tables. Examples include MySQL, PostgreSQL, and Oracle Database .
+
+Non-Relational Databases (NoSQL)
+Non-relational databases do not use traditional table-based relationships. They store data as key-value pairs, documents, or graphs, and are highly scalable. Examples include MongoDB and Cassandra .
+
+Keys in a Database
+Keys are crucial in databases for identifying records uniquely.
+
+Primary Key
+A Primary Key is an attribute or a set of attributes that uniquely identifies each record in a table. A primary key must contain unique values and not be null .
+
+Foreign Key
+A Foreign Key is a field (or collection of fields) in one table that uniquely identifies a row of another table. It is used to define a relationship between the tables .
+
+Data Types
+In databases, the data type specifies what kind of data can be stored in a column. The major categories include:
+
+String data types: (Char, Varchar)
+
+Char: Fixed-length strings
+Varchar: Variable-length strings
+Numeric data types: (Int64, Float64)
+
+Int64: Stores integer values
+Float64: Stores floating-point numbers
+Date & Time types: (Date, Time, Datetime, Timestamp)
+
+Date: Stores date values
+Time: Stores time values
+Datetime: Stores both date and time
+Timestamp: Stores seconds elapsed since Unix epoch
+Database Schema
+A database schema defines the logical configuration of all or part of a relational database. It provides a visual representation of tables, columns, and the relationships between tables .
+
+Differences between Databases and Data Warehouses
+Databases are used for everyday transaction processing. They are optimized for data integrity and speed of individual operations .
+Data Warehouses are used for storing large amounts of historical data. They are optimized for reading large volumes of data and are usually used in reporting and analysis contexts .
+Use Cases and Analogies
+Think of a database as a notebook where you record daily sales in a pre-digital era. Similarly, a database stores data in a structured format in the digital era .
+An analogy used in class compared databases and data warehouses with RAM and hard disk storage. Databases are like RAM in mobile phones (fast operations with limited capacity), whereas data warehouses are like hard disk storage (massive storage capacity for historical data) .
