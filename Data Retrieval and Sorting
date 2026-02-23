@@ -1,0 +1,63 @@
+Data Retrieval and Sorting
+
+1. Data Retrieval with SQL
+Basic Retrieval using SELECT *:
+
+
+Syntax: SELECT * FROM schema.table_name;
+
+Retrieves all columns and rows from a specified table. Used when exploring data structures for the first time .
+Specifying Columns:
+
+It's generally a good practice to specify the columns you need instead of using *, to avoid unnecessary data processing and transfer, which is crucial for performance and maintainability especially in production environments【4:19†typed.md】.
+
+Example:
+SELECT product_id, product_name FROM farmers_market.product;
+
+
+2. Data Ordering with ORDER BY
+Sorting Data:
+Default sorting order is ascending. You must explicitly specify DESC for descending order.
+
+Example: Sorting products by price in ascending order and by name in descending order:
+
+
+SELECT * FROM farmers_market.products
+ORDER BY price ASC, product_name DESC;
+
+This helps in organizing query results for better readability and analysis
+
+
+3. Pagination with LIMIT and OFFSET
+LIMIT and OFFSET:
+LIMIT specifies the number of records to return.
+OFFSET skips a specific number of rows before beginning to return rows.
+Useful for paginating results in user interfaces or APIs.
+
+Example:
+SELECT * FROM farmers_market.customer_purchases
+ORDER BY market_date DESC
+LIMIT 10 OFFSET 5;
+
+Here, it returns 10 records beginning from the 6th record
+
+
+4. Using JOINs for Combining Tables
+Junction Tables:
+Used for managing many-to-many relationships by breaking them into many-to-one and one-to-many relationships.
+Essential in relational databases for linking related data across tables without redundancy【4:6†transcript.txt】.
+
+
+5. SQL Functions and Calculations
+Inline Calculations:
+You can perform operations directly in your SQL query for on-the-fly calculations.
+
+Example: Calculating total costs from quantity and price per item in a purchases table:
+
+SELECT 
+  market_date,
+  customer_id,
+  vendor_id,
+  quantity * cost_to_customer_per_qty AS total_cost
+FROM farmers_market.customer_purchases;
+Inline calculations help with handling computed fields within SELECT statements
