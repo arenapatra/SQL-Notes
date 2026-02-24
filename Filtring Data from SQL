@@ -1,0 +1,49 @@
+Handling NULL Values in SQL
+NULL values in SQL represent missing or undefined data. Proper handling of NULLs is critical for ensuring accurate data analysis. Below are key concepts discussed:
+
+NULL vs. Blank: It's vital to differentiate between NULL and a blank string (“”), as both represent different states in databases .
+
+IS NULL and IS NOT NULL: These are used to filter records based on NULL values .
+
+SELECT * FROM farmers_market.product WHERE product_size IS NULL;
+IFNULL() Function: This function is used to replace NULL values with a specified default value. This is particularly useful when preparing data for reports or analytics to ensure no gaps exist in data fields .
+
+SELECT product_id, IFNULL(product_size, 'medium') FROM farmers_market.product;
+TRIM() Function: Often used to remove spaces from the beginning and end of strings, this function aids in identifying purely blank entries that may just appear as empty strings .
+
+Subqueries
+Subqueries, or nested queries, allow you to perform operations in a stepwise manner, first extracting some data and then using that output in another query.
+
+Definition and Use Cases: A subquery is an SQL query nested within another query, allowing for complex filtering and data retrieval operations .
+
+Subqueries are typical in scenarios where data from multiple criteria need to be pulled together, or specific indirect results are required based on another set of data.
+Example Usage: Identifying purchases made on rainy days using nested queries:
+
+SELECT * FROM farmers_market.customer_purchases 
+WHERE market_date IN 
+(SELECT market_date FROM farmers_market.market_date_info WHERE market_rain_flag = 1);
+Execution Flow: A subquery (identified as a 'child' query) is executed first to pass its results to its parent query .
+
+Case Statements
+Case statements provide a way to implement conditional logic in SQL, allowing the output of the query to vary based on the data.
+
+Definition: A case statement in SQL can evaluate conditions and return a value when the first condition is met (similar to IF-THEN-ELSE logic in programming) .
+
+Use Cases:
+
+Categorizing data based on value ranges.
+Deriving new columns based on conditions across multiple fields.
+Example:
+
+Creating bins based on purchase amount:
+SELECT 
+    market_date, 
+    customer_id, 
+    CASE 
+        WHEN quantity * cost_to_customer_per_qty < 5 THEN 'Under $5' 
+        WHEN quantity * cost_to_customer_per_qty BETWEEN 5 AND 9.99 THEN '$5 - $9.99' 
+        ELSE 'Above $10' 
+    END AS price_range 
+FROM farmers_market.customer_purchases;
+Practical Insights
+This session underlines the importance of mastering SQL to derive meaningful insights from data. By understanding and applying these techniques, one can provide strategic recommendations for business operations such as inventory management, customer insights, and financial analysis.
