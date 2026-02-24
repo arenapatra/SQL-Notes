@@ -1,0 +1,60 @@
+Understanding Wildcards in SQL
+During the class, it was explained that underscores and percentages have special meanings when using SQL's LIKE operator:
+
+Underscore _: Represents a single character.
+Percentage %: Represents zero or more characters.
+For example:
+
+SELECT * FROM table WHERE name LIKE 'A%';
+This would select all rows where the name starts with 'A' and is followed by any number of characters .
+
+SQL Queries with Conditional Operators
+We explored using SQL conditional operators such as =, <>, AND, OR, and NOT to filter the database results:
+
+AND: All conditions separated by AND must be TRUE.
+OR: Any of the conditions separated by OR can be TRUE.
+NOT: Reverses the value of a boolean expression.
+Example: Filtering with Conditions
+SELECT * FROM products WHERE (product_id > 3 AND product_id < 8) OR product_id = 10;
+This query fetches products with IDs between 4 and 7 and products with an ID of 10【4:10†typed.md】.
+
+Manipulating Strings in SQL
+Several examples demonstrated string concatenation and manipulation:
+
+Using CONCAT() to combine strings.
+Utilizing UPPER() and LOWER() to change text cases.
+Employing SUBSTR() to fetch parts of a string.
+Example: String Concatenation
+SELECT CONCAT(first_name, ' ', last_name) AS full_name FROM customers;
+This creates a new column full_name by concatenating the first and last names separated by a space .
+
+Example: Capitalizing Names
+The instructor showed how to capitalize the first character of names:
+
+SELECT UPPER(SUBSTR(first_name, 1, 1)) || SUBSTR(first_name, 2) AS capitalized FROM customers;
+This changes the first letter to uppercase while leaving the rest in lowercase .
+
+SQL Execution Order
+The class emphasized understanding the order of execution in SQL, important for writing effective queries:
+
+FROM clause
+WHERE clause
+GROUP BY clause
+HAVING clause
+SELECT clause
+ORDER BY clause
+Understanding this sequence helps in optimized and error-free query writing .
+
+Using BETWEEN for Date Ranges
+To find data within a date range, the BETWEEN keyword was used:
+
+SELECT * FROM orders WHERE order_date BETWEEN '2023-01-01' AND '2023-12-31';
+This retrieves orders within the entire year of 2023, highlighting that BETWEEN is inclusive【4:10†typed.md】.
+
+Handling NULLs and Default Values
+The class addressed handling NULLs, shown through:
+
+COALESCE() or IFNULL() functions, which substitute NULLs with a default value.
+Assigning default values to certain fields when necessary:
+SELECT product_id, COALESCE(size, 'medium') FROM products;
+This assigns 'medium' to any product sizes that are NULL .
