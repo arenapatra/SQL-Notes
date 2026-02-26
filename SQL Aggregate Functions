@@ -1,0 +1,66 @@
+COUNT Function Variations
+COUNT(*) vs COUNT(1) vs COUNT(col_name) vs COUNT(DISTINCT col_name):
+COUNT(*): Counts all rows, including NULL values.
+COUNT(1): Similar to COUNT(*), often used for the same purpose, counting all rows.
+COUNT(col_name): Counts the number of non-NULL entries in a specified column.
+COUNT(DISTINCT col_name): Counts distinct non-NULL entries, ideal for identifying unique values .
+GROUP BY Clause
+The GROUP BY statement aggregates data across multiple records by specifying the level of summarization.
+
+Syntax:
+SELECT [columns to return]
+FROM [table]
+WHERE [conditional filter statements]
+GROUP BY [columns to group on]
+ORDER BY [columns to sort on]
+LIMIT [first x number of rows to be selected];
+
+Execution Order: FROM, WHERE, GROUP BY, Aggregate functions, SELECT, ORDER BY, OFFSET, LIMIT .
+Practical SQL Queries and Examples
+Analyzing Patient Data
+
+Basic COUNT Example:
+
+Calculate the total number of patient records:
+SELECT COUNT(*) AS Total_Patients FROM med.hospital;
+This counts all records in the hospital table .
+
+Unique Medical Conditions:
+
+Find the number of unique medical conditions:
+SELECT COUNT(DISTINCT Medical_Condition) AS Unique_Conditions FROM med.hospital;
+Percentage of Patients Diagnosed with Each Condition:
+
+Determine the spread of medical conditions amongst patients:
+SELECT 
+    Medical_Condition,
+    CONCAT(ROUND(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM med.hospital), 2), "%") AS Percentage_Patients
+FROM med.hospital
+GROUP BY Medical_Condition
+ORDER BY Percentage_Patients DESC;
+This query calculates what percentage of patients are diagnosed with each condition .
+
+Distribution of Patients' Age:
+
+Use GROUP BY on the Age column to get the count of patients per age group:
+SELECT 
+   Age,
+   COUNT(*) AS Patient_Count
+FROM med.hospital
+GROUP BY Age
+ORDER BY Age;
+This will display how many patients are in each age group .
+
+Average BMI for Patients with Obesity:
+
+Calculate the average BMI for a specific subset using the AVG function:
+SELECT AVG(BMI) AS Avg_BMI FROM med.hospital WHERE Medical_Condition = 'Obesity';
+Filters data specifically for patients with obesity and then averages their BMI .
+
+Important Considerations
+Understanding Raw Data: Emphasized the importance of comprehending raw data granularity. Each SQL query or calculation needs to understand the dataset structure, like knowing every row might represent a unique patient【4:5†source】.
+Column Order in GROUP BY: Columns specified in GROUP BY ensure that any non-aggregate columns in SELECT are part of the group. Failing to do this often results in SQL errors .
+Concepts Reinforced
+The use of SQL aggregate functions in extracting meaningful data insights.
+Techniques like GROUP BY for aggregating data, which are critically important for organizing systematic data analysis.
+The nuances between different types of SQL count functions and knowing when to use each .
