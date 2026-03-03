@@ -1,0 +1,65 @@
+Understanding Granularity
+Granularity refers to the level of detail represented by each row in a dataset. In the context of the Zomato data, each row represents information about a single restaurant. Understanding the granularity helps in deciding how to aggregate data for analysis【4:0†source】.
+
+Dataset Overview
+Zomato Dataset Description
+RestaurantID: Unique identifier for each restaurant.
+RestaurantName: Name of the restaurant.
+CountryCode: Numeric code representing the country.
+City: The city where the restaurant is located.
+Address: Full address of the restaurant.
+Locality & LocalityVerbose: Detailed locality information.
+Cuisines: Types of cuisines offered (comma or pipe-separated).
+Currency: Currency used for pricing.
+Has_Table_booking & Has_Online_delivery: Whether the restaurant supports table booking and online delivery.
+Is_delivering_now: Indicates current delivery status.
+Switch_to_order_menu: If an order menu is available.
+Price_range: Category of pricing scale (1 to 4).
+Votes: Number of user votes or reviews received.
+Average_Cost_for_two: Average dining cost for two people.
+Rating: Average rating from users.
+Key Concepts and SQL Queries
+Group By and Aggregation
+Objective: To identify the top two cities with the highest number of restaurants meeting specific criteria.
+Approach: Use GROUP BY to aggregate data at the city level and then order by the count of restaurants in descending order【4:12†source】.
+Example Query:
+SELECT City, COUNT(RestaurantID) AS Total_Restaurants
+FROM Zomato
+GROUP BY City
+ORDER BY Total_Restaurants DESC
+LIMIT 2;
+Filtering with Criteria
+Requirements: Only consider restaurants with certain attributes (e.g., online delivery, no table booking).
+Implementation: Use WHERE clause to filter data based on these criteria【4:0†source】【4:12†source】.
+Example Query:
+SELECT City, COUNT(RestaurantID) AS Total_Restaurants
+FROM Zomato
+WHERE Has_Online_delivery = 'Yes' AND Has_Table_booking = 'No'
+GROUP BY City
+ORDER BY Total_Restaurants DESC
+LIMIT 2;
+Calculating Percentages
+Task: Calculate the percentage of restaurants offering online delivery per city.
+Method: Use aggregation to find the total and online delivery restaurants, then calculate the percentage【4:18†source】.
+Example Query:
+SELECT City, 
+       COUNT(CASE WHEN Has_Online_delivery = 'Yes' THEN 1 END) * 100.0 / COUNT(*) AS Online_Delivery_Percentage
+FROM Zomato
+GROUP BY City
+HAVING COUNT(*) > 10
+ORDER BY Online_Delivery_Percentage DESC
+LIMIT 5;
+Handling Multiple Cuisines
+Challenge: Some records have multiple cuisines listed, affecting how data is aggregated.
+Solution: Handle aggregation carefully and consider if data needs splitting for more detailed analysis【4:16†source】【4:17†source】.
+Problem Solving Session: Hands-On Queries
+The class involved learners actively writing and testing SQL queries to answer specific business questions about restaurant data. The exercises are designed to reinforce understanding of data manipulation using SQL and make learners comfortable with real-world datasets【4:4†source】.
+
+Example Problem
+Question: Which 10 restaurants are the most expensive based on average cost for two, and what are their locations and price tiers.
+
+Solution Query:
+SELECT RestaurantName, City, Average_Cost_for_two, Price_range
+FROM Zomato
+ORDER BY Average_Cost_for_two DESC
+LIMIT 10;
