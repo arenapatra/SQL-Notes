@@ -1,0 +1,40 @@
+Introduction to Joins
+SQL joins are used to combine rows from two or more tables based on a related column. This is essential when dealing with databases where related information may be split across multiple tables. By using joins, we can create more comprehensive data insights.
+
+Types of Joins and Their Use Cases
+1. Inner Join
+An inner join returns records that have matching values in both tables. It is the most common type of join.
+
+Conceptual Example: Consider two tables: ‘Film’ and ‘Category’. When you perform an inner join on these tables based on a common column (e.g., film_id), you get a dataset with films paired with their respective categories.
+Analogy: Think of it like a Venn Diagram where you are interested in the intersection of two sets.
+2. Left Join
+A left join returns all records from the left table and the matched records from the right table. Unmatched records from the right table will be returned as NULL.
+
+Use Case: If you want to list all films and their corresponding categories, including films without categories, a left join would be appropriate.
+Analogy: This can be thought of as wanting all members of a club (left), and only those who have paid dues (right). All members are acknowledged, even those who haven’t paid.
+3. Right Join
+A right join returns all records from the right table and the matched records from the left table. Unmatched records from the left table return as NULL.
+
+Application: This could be used for returning all categories and the films associated with them, showing categories even if they don’t have films.
+4. Full Outer Join
+A full outer join returns all records when there is a match in either left or right table records.
+
+Example: Useful when you want every record from two tables, with matching records from either table.
+Analogy: This can be envisaged as an event where anyone who is either a sponsor or an attendee is listed, not just those who are both.
+Order of Execution and Syntax in SQL
+Understanding how SQL processes joins is crucial for writing efficient queries:
+
+Order of Execution: SQL follows a logical order when parsing query syntax. The execution order for queries typically starts with FROM, followed by JOIN, and then other clauses like WHERE, GROUP BY, HAVING, SELECT, and finally ORDER BY【4:2†transcript】.
+
+Example Syntax:
+
+SELECT a.column1, b.column2
+FROM table1 a
+INNER JOIN table2 b
+ON a.common_column = b.common_column;
+Use inner joins when you need to retrieve only the records that have common entries in both tables.
+
+Practical Applications: Examples and Queries
+Listing Films with Categories: To list all films with their categories, an inner join can be applied between the Film and Category tables, with the film_id or category_id as the common key.
+
+Calculating Rental Amounts: Using a group by customer_id to sum rental amounts per customer demonstrates an application for understanding customer behavior through joins
