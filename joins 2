@@ -1,0 +1,37 @@
+Introduction to Joins
+Join in SQL is a means for combining fields from two or more tables by using values common to each. The basic types of joins include:
+
+Inner Join: Returns records that have matching values in both tables.
+Left (Outer) Join: Returns all records from the left table (table1), and the matched records from the right table (table2). The result is NULL from the right side if there is no match.
+Right (Outer) Join: Returns all records from the right table (table2), and the matched records from the left table (table1). The result is NULL from the left side if there is no match.
+Full (Outer) Join: Returns all records when there is a match in either left (table1) or right (table2) table records.
+2. Non-Equi Joins
+Non-equi joins are used when you need to join tables based on a condition other than equality. The operators can be <, >, <=, >=, !=, or BETWEEN.
+
+Example:
+Suppose you have a user database and you want to recommend new places based on places they haven't visited yet. This involves recommending places using a condition of non-equality (!=) such that places the user has already visited don't appear in the recommendations【4:0†source】.
+
+3. Self Joins
+Self Join is a regular join, but the table is joined with itself. It is helpful to extract data or information involving comparing rows within the same table.
+
+Scenario:
+Find managers for each employee in a company where both managers and employees exist in the same table .
+
+4. Cross Joins
+Also known as the Cartesian Join, this join returns the Cartesian product of the two tables by combining each row from the first table with every row from the second table. It's useful when all possible combinations are needed.
+
+Example:
+Creating all possible combinations between car models and available colors .
+
+5. Calculating and Aggregating Data with Joins
+Counting Rentals:
+To find the number of currently rented films, you can use a left join between the film and rental tables and check for NULL in return dates to identify currently rented items .
+
+Summing with Conditions:
+Use the CASE statement inside a SUM function to count specific conditions. For instance, count users with no names (WHERE name IS NULL) by converting null values into 1 and others into 0, then summing these values .
+
+6. Real-World Application and Insights
+While equi-joins are more commonly used in practical applications due to their simplicity and directly relatable logic, understanding and applying non-equi and other complex join operations can enhance data analysis skills significantly .
+
+7. Handling Edge Cases
+When working with joins, especially involving large datasets or nullable fields, ensure to handle null values accurately, since these might lead to unexpected results if not carefully addressed .
