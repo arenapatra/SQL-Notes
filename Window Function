@@ -1,0 +1,45 @@
+1. Window Functions Overview
+Window Function Definition: Window functions perform calculations across a set of table rows that are somehow related to the current row. This is different from other SQL aggregate functions which return a single result row for each set of rows.
+
+Types of Window Functions:
+
+Ranking Functions: ROW_NUMBER(), RANK(), DENSE_RANK()
+Aggregate Functions: SUM(), AVG()
+Value Functions: FIRST_VALUE(), LAST_VALUE(), NTH_VALUE()
+2. Order of Execution in SQL
+SQL has a specific order of operations that affects the outcome of the queries. Particularly, window functions are computed after the WHERE clause filtering has been applied, hence sometimes requiring the use of subqueries for filtering on window function results【4:6†transcript】.
+3. Aggregated Window Functions
+Purpose: Apply aggregate calculations such as SUM, AVG, etc., across a window of data rather than collapsing it into summary rows.
+Syntax: Uses OVER() clause which can include PARTITION BY to define groups and ORDER BY for row sequence .
+Example:
+SELECT employee_id,
+       department_id,
+       salary,
+       AVG(salary) OVER(PARTITION BY department_id) AS avg_salary
+FROM employees;
+4. Partitioning and Grouping
+GROUP BY vs. PARTITION BY:
+GROUP BY collapses rows into summary rows.
+PARTITION BY maintains the original number of rows, applying the aggregate function within each partition .
+5. Ranking Functions
+Row Number: Assigns a unique number to each row based on the specified order.
+Rank: Assigns a rank with gaps for ties.
+Dense Rank: Similar to Rank without gaps.
+Use Case:
+Finding the top n salaries, where ties are considered .
+
+6. NTILE for Data Distribution
+NTILE Function: Distributes rows into a specified number of groups or "buckets", useful for dividing data into quartiles, quintiles, etc. .
+Example:
+SELECT employee_id,
+       salary,
+       NTILE(4) OVER(ORDER BY salary) AS salary_quartile
+FROM employees;
+7. Practical Examples and Discussions
+Filtering with Subqueries: Explained the necessity of using subqueries to filter results from window functions as they are calculated after initial row filtering .
+
+Interview Insights: Discussed common interview scenarios for SQL queries, emphasizing the importance of using functions like DENSE_RANK over simple queries with limit and order .
+
+8. Use Cases Covered
+Determine employees with salaries above the average.
+Rank employees based on salary within their departments .
