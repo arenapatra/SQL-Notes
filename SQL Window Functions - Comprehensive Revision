@@ -1,0 +1,53 @@
+Key Concepts
+1. Window Functions Basics
+Window functions are powerful for performing calculations across set rows related to the current query row. Unlike aggregate functions, window functions do not cause rows to become grouped into a single output row, which means all rows remain visible.
+
+2. Window Frames
+Range vs. Rows:
+
+Range considers rows with the same values in the ORDER BY clause as a single entity, allowing aggregation over these implicitly grouped rows.
+Rows treats each row independently, even if there are duplicates.
+Example:
+
+SUM(salary) OVER(ORDER BY hire_date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+3. Aggregate and Ranking Functions
+Aggregate Functions: Such as SUM, COUNT, MIN, MAX performed over a specific window frame.
+
+Ranking Functions: Include ROW_NUMBER(), RANK(), DENSE_RANK(), and NTILE(). Example usage:
+
+ROW_NUMBER() OVER(PARTITION BY department_id ORDER BY sales DESC)
+4. LEAD() and LAG() Functions
+LEAD() allows access to subsequent row data relative to a current row.
+
+LEAD(salary) OVER(ORDER BY salary)
+LAG() retrieves from preceding rows.
+
+LAG(salary) OVER(ORDER BY salary)
+These are instrumental for tasks such as comparing salaries with the following or preceding salaries.
+
+5. Handling Duplicates with Window Functions
+SQL handles duplicate values in a specific way during window function calculations:
+
+Duplicates may be combined if the RANGE keyword is used, impacting the calculation over that window.
+6. Real-world Applications of Window Functions
+Assess changes in financial data, such as stock prices or sales figures using historical comparison.
+Compute running sums or averages for business metrics over specific periods.
+7. Advanced Control with Window Frames
+Window frames control the subset of the table considered for each row during the calculation:
+
+UNBOUNDED PRECEDING: Includes all rows from the start of the partition up to the current row.
+CURRENT ROW: Refers to the position in the frame as it is processed.
+Example:
+
+SUM(salary) OVER (
+  PARTITION BY department_id 
+  ORDER BY hire_date 
+  ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+)
+This will compute a running sum across each department.
+
+8. Applications and Limitations
+Cases shown included cumulative sales reporting and comparative salary analysis among employees in a company.
+Limitations include handling of duplicates and constraints around non-numeric ORDER BY columns in RANGE usage.
+9. Final Practice and Applications
+Understanding window functions is crucial for complex data analysis in SQL. Regular practice by writing and executing queries will significantly enhance comprehension and proficiency
