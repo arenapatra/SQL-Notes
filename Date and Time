@@ -1,0 +1,52 @@
+Introduction to Date and Time Functions
+In this class, we explored the vital role of date and time functions in SQL, which might appear simple but are incredibly powerful when it comes to data analysis and extraction of insights. Understanding how to manipulate date and time data types is crucial for analyzing temporal data, predicting outcomes, and generating reports based on time-series data .
+
+Practical Use Cases
+Sales Data Analysis: Date and time columns can be utilized to derive insights such as sales trends over months, quarters, specific high-sale periods, and week-by-week analyses .
+Earthquake Analysis: The Earthquake table example was used, which contains columns like ID, date, time, magnitude, and location, to demonstrate how date and time functions can be applied to extract meaningful patterns and statistics .
+Key SQL Date & Time Functions Discussed
+1. EXTRACT() Function
+The EXTRACT() function is used to pull out a component of the date or time. For example:
+
+To find how many earthquakes occur annually or observe trends, use:
+SELECT 
+   EXTRACT(YEAR FROM Datetime) AS Year, 
+   COUNT(ID) AS Earthquake_Count
+FROM db.earthquakes
+GROUP BY Year
+ORDER BY Year;
+This groups the earthquakes by year and counts them .
+2. PARSE_DATETIME() Function
+PARSE_DATETIME converts a string representation of a date time into a proper date-time value:
+
+Query Example:
+SELECT *,
+PARSE_DATETIME("%Y-%m-%d %H:%M:%S", CONCAT(Date," ", Time)) AS Datetime
+FROM db.earthquakes;
+This combines the Date and Time columns into a single Datetime column .
+3. FORMAT_DATE() Function
+This function formats a date/time according to the given string:
+
+Usage Example: Analyze quarterly patterns:
+SELECT 
+   FORMAT_DATE('%Y-Q%Q', Datetime) AS YearQuarter, 
+   COUNT(ID) AS Earthquake_Count
+FROM db.earthquakes
+GROUP BY YearQuarter
+ORDER BY YearQuarter;
+4. CURRENT_DATE(), CURRENT_TIME(), CURRENT_DATETIME() Functions
+These functions provide the current system date and/or time:
+
+Can be used for comparing timestamps or generating reports relative to the current date.
+5. Window Functions: FIRST_VALUE(), LAST_VALUE(), NTH_VALUE()
+NTH_VALUE: Used to fetch the value of a column from the Nth row in a window frame:
+SELECT
+ department_id, employee_id, hire_date, salary,
+ FIRST_VALUE(salary) OVER (PARTITION BY department_id ORDER BY hire_date ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS first_hired_emp_sal,
+ LAST_VALUE(salary) OVER (PARTITION BY department_id ORDER BY hire_date ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS last_hired_emp_sal
+FROM hr.employees
+ORDER BY department_id;
+This compares employee salaries within departments .
+Implementation Examples
+Analyzing Earthquake Data: Extracting the year to count earthquakes or determining significant earthquake events based on their magnitude .
+Sales Trend Analysis: Creating insights on sales performance over different time frames using the combination of EXTRACT, FORMAT_DATE, and PARSE_DATETIME .
