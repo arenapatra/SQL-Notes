@@ -1,0 +1,35 @@
+Introduction to E-Commerce Data
+E-commerce companies handle vast amounts of transaction data, which is structured into several key tables: Orders, Order Items, Payments, Products, Customers, and Sellers. Understanding these tables and their relationships is crucial for data analysis and management.
+
+Key Concepts
+Orders Table
+Order ID: Serves as the primary key. It's central to linking various tables since other tables like Order Items and Payments reference it.
+Customer ID: Associated with each order, allowing us to trace which customer placed it.
+Status: Indicates the current state of the order, such as delivered, in transit, or returned.
+Timestamps: Both the order date and the delivery date (if applicable) are recorded in the Orders table.
+Order Items Table
+Item ID: Represents each item in an order. Not a primary key alone; combined with Order ID to form a composite key since multiple same items can be part of a single order.
+Product ID & Seller ID: Connects each item to detailed information about the product and seller.
+Payments Table
+Payment Types: Different methods such as credit card, EMI, etc., are logged here. Payment Installments are tracked to understand the method used for clearing due.
+Order ID Reference: Links back to the Orders table to associate payments with specific orders.
+Products Table
+Product Details: Important attributes include Product ID, category name, product dimensions (length, width, height), and weight.
+Weight Impact on Delivery Costs: Often a critical factor in determining shipping charges, emphasizing the importance of accurate data capture in the Products table.
+Customers Table
+Demographic Information: Customer ID, city, state, and potentially unique identifiers like ZIP codes are stored. This allows tracking customer locations and behaviors.
+Sellers Table
+Seller Information: Details like seller ID, location, and products offered are critical for e-commerce operations. This helps manage vendor relationships and product sourcing.
+Data Relationships in E-Commerce
+Entity Linkages: Orders are linked to Order Items, Payments, and Customers via Order ID, creating a comprehensive view of each transaction.
+Data Insights: Understanding seasonality, trends, and customer behavior requires grouping data by relevant time frames and analyzing changes over time.
+Analytical Processing
+SQL Functions: Utilize group by, lead, and lag SQL functions for handling time series data such as month-over-month sales comparison.
+Aggregation Techniques: Calculate metrics like average order value by dividing total sales by distinct order counts to avoid inflated averages due to repeated products in orders.
+Practical Insights
+Seasonality and Demand Forecasting: Analyzing monthly sales data can aid in identifying peak demand periods that are critical for inventory planning.
+Using Charts for Better Insights: Visualization tools such as line and bar charts help communicate data stories effectively to stakeholders.
+Additional Guidance
+Data Preparation: Before performing any analysis, it's crucial to understand the schema and dataset characteristics. This groundwork simplifies the query-building process and ensures accurate results.
+Seasonal Effects on Orders: Recognizing seasonal patterns in sales or customer activity can significantly influence marketing and operations strategies.
+These notes summarize the intricate system of data handling in e-commerce firms, equipping learners with the foundational knowledge needed to manage and analyze this data effectively.
